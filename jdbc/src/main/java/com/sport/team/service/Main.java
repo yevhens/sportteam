@@ -4,41 +4,56 @@ import com.sport.team.entity.Skill;
 import com.sport.team.entity.Tool;
 import com.sport.team.entity.User;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.sun.tools.internal.xjc.reader.Ring.add;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
-        try{
 
-            Tool tool=new Tool();
-            tool.setId(1);
-            tool.setName("Hammer");
-            add(tool);
-            List<Tool> tools=new ArrayList<>();
-            tools.add(tool);
+   /*     User user=new User();
+        user.setId(5);//делаю новый айди для юзера
+        user.setName("Nikita");
+        user.setPhone("78789778978998789");
+        user.setEmail("mailpoitu@gmail.ru");
+        List<Tool> tools=new ArrayList<>();//создаю два аррэй листа для скиллзов и тулзов
+        List<Skill> skills=new ArrayList<>();
+        Tool tool1=new Tool();//создаю два тулза
+        Tool tool2=new Tool();
+        tool1.setName("basel");
+        tool1.setId(5);
+        tool2.setName("hencel");
+        tool2.setId(6);
+        Skill skill1=new Skill();//создаю два скилза
+        Skill skill2=new Skill();
+        skill1.setName("baselling");
+        skill1.setId(5);
+        skill2.setName("hencellin");
+        skill2.setId(6);
+        tools.add(tool1);
+        tools.add(tool2);
+        skills.add(skill1);
+        skills.add(skill2);
+        user.setSkills(skills);
+        user.setTools(tools);
+        System.out.println(user.toString());
+        UserService userService=new UserService();
+        userService.add(user);*/
 
-            Skill skill=new Skill();
-            skill.setId(1);
-            skill.setName("Hammering things");
-            add(skill);
-            List<Skill> skills=new ArrayList<>();
-            skills.add(skill);
-
-            User user=new User();
-            user.setId(1);
-            user.setName("Brett Meyer");
-            user.setEmail("mayer@gmail.com");
-            user.setPhone("044-516-19-99");
-            user.setTools(tools);
-            user.setSkills(skills);
-
-            add(user);
-        }catch (Exception e)
-        {e.printStackTrace();}
+SkillService skillService=new SkillService();
+        Skill sool1=new Skill(19,"upd1");
+        Skill sool2=new Skill(20,"upd2");
+        Skill sool4=new Skill(22,"upd3");
+        Skill sool3=new Skill(21,"upd14");
+        System.out.println(skillService.getAll().toString());
+        skillService.delete(sool1);
+        skillService.delete(sool2);
+        skillService.delete(sool3);
+        skillService.delete(sool4);
 
     }
 }
+
+

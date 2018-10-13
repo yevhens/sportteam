@@ -14,13 +14,13 @@ public interface SkillDAO {
     /** Извлекает объект, предварительно сохраненный в базе данных, используя
      *   указанный id в качестве первичного ключа
      */
-    public Skill get(int id);
+    public Skill get(int id) throws SQLException;
 
     /** Сохраняет изменения, сделанные в объекте.  */
-    public void update(Skill skill);
+    public void update(Skill skill) throws SQLException;
 
     /** Удаляет объект  */
-    public void delete(Skill skill);
+    public void delete(Skill skill) throws SQLException;
 
     /** Возвращает список объектов соответствующих всем записям в базе данных */
     public List<Skill> getAll() throws SQLException;

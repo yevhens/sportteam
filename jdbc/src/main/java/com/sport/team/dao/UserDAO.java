@@ -14,13 +14,13 @@ public interface UserDAO{
     /** Извлекает объект, предварительно сохраненный в базе данных, используя
      *   указанный id в качестве первичного ключа
      */
-    public User get(int id);
+    public User get(int id) throws SQLException;
 
     /** Сохраняет изменения, сделанные в объекте.  */
-    public void update (User user);
+    public void update (User user) throws SQLException;
 
     /** Удаляет объект  */
-    public void delete(User user);
+    public void delete(User user) throws SQLException;
 
     /** Возвращает список объектов соответствующих всем записям в базе данных */
     public List<User> getAll() throws SQLException;

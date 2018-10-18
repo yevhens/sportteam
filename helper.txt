@@ -1,0 +1,7 @@
+DELETE ALL
+
+DELETE FROM sportteam.Users;
+DELETE FROM sportteam.Skills;
+DELETE FROM sportteam.Tools;
+DELETE FROM sportteam.Users_Tools;
+DELETE FROM sportteam.Users_Skills;

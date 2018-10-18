@@ -28,4 +28,12 @@ public class Tool {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Tool{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

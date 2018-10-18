@@ -31,9 +31,7 @@ public class SkillService implements SkillDAO {
             System.out.println("Successfully added skill" + " " + skill.getName());
             stmt.close();
         }catch (Exception e){e.printStackTrace();
-            if (connection !=null){
-                connection.rollback();
-            }
+
         }finally {
             if(stmt !=null){
                 stmt.close();
@@ -116,9 +114,7 @@ public class SkillService implements SkillDAO {
             stmt.executeUpdate();
             System.out.println("Skill with id"+" "+skill.getId()+" "+ "is deleted");
         }catch (Exception e){e.printStackTrace();
-        if (connection !=null){
-            connection.rollback();
-        }
+
         }finally {
             if(stmt !=null){
                 stmt.close();

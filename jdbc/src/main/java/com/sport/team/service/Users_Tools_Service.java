@@ -1,10 +1,10 @@
 package com.sport.team.service;
 
-import com.sport.team.Util;
 import com.sport.team.dao.ToolDAO;
+import com.sport.team.dao.Users_Tools_DAO;
 import com.sport.team.entity.Tool;
-import com.sport.team.entity.Tool;
-import com.sport.team.entity.Tool;
+import com.sport.team.entity.Users_Skills;
+import com.sport.team.entity.Users_Tools;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,20 +15,20 @@ import java.util.List;
 
 import static com.sport.team.Util.getconnection;
 
-public class ToolService implements ToolDAO {
+public class Users_Tools_Service implements Users_Tools_DAO {
 
     Connection connection;
 
     @Override
-    public void add(Tool Tool) throws SQLException {
+    public void add(Users_Tools users_Tools) throws SQLException {
         PreparedStatement stmt=null;
         try{
             connection=getconnection();
-            stmt=connection.prepareStatement("INSERT INTO Tools VALUES(?,?)");
-            stmt.setInt(1,Tool.getId());
-            stmt.setString(2,Tool.getName());
+            stmt=connection.prepareStatement("INSERT INTO Users_Tools VALUES(?,?)");
+            stmt.setInt(1,users_Tools.getUserId());
+            stmt.setInt(2,users_Tools.getToolId());
             stmt.executeUpdate();
-            System.out.println("Successfully added Tool" + " " + Tool.getName());
+            System.out.println("Successfully added user_id " + " " + users_Tools.getUserId());
             stmt.close();
         }catch (Exception e){e.printStackTrace();
 
@@ -44,21 +44,23 @@ public class ToolService implements ToolDAO {
     }
 
     @Override
-    public Tool get(int id) throws SQLException {
+    public Users_Tools get(int userId,int skillId) throws SQLException {
 
         PreparedStatement stmt=null;
         ResultSet rs=null;
-        Tool Tool=new Tool();
+        Users_Tools users_Tools=new Users_Tools();
 
         try{
             connection=getconnection();
-            stmt=connection.prepareStatement("SELECT Tools.id,Tools.name FROM Tools WHERE Tools.id=?");
-            stmt.setInt(1,id);
+            stmt=connection.prepareStatement("SELECT Users_Tools.userId,Users_Tools.skillId FROM Users_Tools WHERE Users_Tools.userId.id=? AND Users_Tools.skillId=?");
+            stmt.setInt(1,userId);
+            stmt.setInt(2,skillId);
             rs=stmt.executeQuery();
             rs.next();
-            Tool.setId(rs.getInt(1));
-            Tool.setName(rs.getString(2));
+            users_Tools.setUserId((rs.getInt(1)));
+            users_Tools.setToolId((rs.getInt(2)));
             stmt.close();
+
 
         }finally {
             if(stmt !=null){
@@ -74,20 +76,21 @@ public class ToolService implements ToolDAO {
 
 
         }
-        return Tool;
+        return users_Tools;
     }
 
     @Override
-    public void update(Tool Tool) throws SQLException {
+    public void update(Users_Tools users_Tools) throws SQLException {
         PreparedStatement stmt=null;
 
         try{
             connection=getconnection();
-            stmt=connection.prepareStatement("UPDATE Tools SET Tools.name=? WHERE Tools.id=?");
-            stmt.setString(1,Tool.getName());
-            stmt.setInt(2,Tool.getId());
+            stmt=connection.prepareStatement("UPDATE Users_Tools SET Users_Tools.userId=? WHERE Users_Tools.skillId=?");
+            stmt.setInt(1,users_Tools.getUserId());
+            stmt.setInt(2,users_Tools.getToolId());
             stmt.executeUpdate();
-            System.out.println("Tool with id"+" "+Tool.getId()+" "+ "is updated");
+            System.out.println("User with id"+" "+users_Tools.getUserId()+" "+ "is updated");
+            System.out.println("Skill with id"+" "+users_Tools.getToolId()+" "+ "is updated");
 
 
         }catch (Exception e){e.printStackTrace();
@@ -105,14 +108,16 @@ public class ToolService implements ToolDAO {
 
     }
     @Override
-    public void delete(Tool Tool) throws SQLException {
+    public void delete(Users_Tools users_Tools) throws SQLException {
         PreparedStatement stmt=null;
         try{
             connection=getconnection();
-            stmt=connection.prepareStatement("DELETE FROM Tools WHERE Tools.id=?");
-            stmt.setInt(1,Tool.getId());
+            stmt=connection.prepareStatement("DELETE FROM Users_Tools WHERE Users_Tools.userId=? AND Users_Tools.ToolsId=?");
+            stmt.setInt(1,users_Tools.getUserId());
+            stmt.setInt(2,users_Tools.getToolId());
             stmt.executeUpdate();
-            System.out.println("Tool with id"+" "+Tool.getId()+" "+ "is deleted");
+            System.out.println("User with id"+" "+users_Tools.getUserId()+" "+ "is deleted");
+            System.out.println("Skill with id"+" "+users_Tools.getToolId()+" "+ "is deleted");
         }catch (Exception e){e.printStackTrace();
 
         }finally {
@@ -129,19 +134,19 @@ public class ToolService implements ToolDAO {
     }
 
     @Override
-    public List<Tool> getAll() throws SQLException {
-        List<Tool> list=new ArrayList<>();
+    public List<Users_Tools> getAll() throws SQLException {
+        List<Users_Tools> list=new ArrayList<>();
         PreparedStatement preparedStatement=null;
         ResultSet rs=null;
         try{
             connection=getconnection();
-            preparedStatement=connection.prepareStatement("SELECT * FROM Tools ORDER BY id");
+            preparedStatement=connection.prepareStatement("SELECT * FROM Users_Tools ORDER BY Users_Tools.userId");
             rs=preparedStatement.executeQuery();
             while(rs.next()){
-                Tool Tool=new Tool();
-                Tool.setId(rs.getInt(1));
-                Tool.setName(rs.getString(2));
-                list.add(Tool);
+                Users_Tools users_Tools=new Users_Tools();
+                users_Tools.setUserId(rs.getInt(1));
+                users_Tools.setToolId(rs.getInt(2));
+                list.add(users_Tools);
             }
 
         }catch (Exception e){e.printStackTrace();}
@@ -155,3 +160,4 @@ public class ToolService implements ToolDAO {
         return list;
     }
 }
+

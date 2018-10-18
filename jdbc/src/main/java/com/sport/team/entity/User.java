@@ -72,12 +72,6 @@ public class User {
         sb.append("\nName: ").append( name );
         sb.append("\nEmail: ").append( email );
         sb.append("\nPhone: ").append( phone );
-        for(Skill skill: skills){
-            System.out.println(skill.getId()+ " " + skill.getName());
-        }
-        for(Tool tool: tools){
-            System.out.println(tool.getId()+ " "+ tool.getName());
-        }
         return sb.toString();
     }
 }

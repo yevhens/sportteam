@@ -15,7 +15,7 @@ import java.util.List;
 
 import static com.sport.team.Util.getconnection;
 
-public class UserService implements UserDAO {
+public class User_Service implements UserDAO {
 
     Connection connection;
 

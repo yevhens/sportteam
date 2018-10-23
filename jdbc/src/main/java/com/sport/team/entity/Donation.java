@@ -14,7 +14,7 @@ public class Donation {
     private double amount;
 
     /** The date added. */
-    private Date dateAdded;
+    private java.sql.Date dateAdded;
 
     /** The project. */
     private Project project;
@@ -45,7 +45,7 @@ public class Donation {
      *
      * @return the date added
      */
-    public Date getDateAdded() {
+    public java.sql.Date getDateAdded() {
         return dateAdded;
     }
 
@@ -54,7 +54,7 @@ public class Donation {
      *
      * @param dateAdded the new date added
      */
-    public void setDateAdded(Date dateAdded) {
+    public void setDateAdded(java.sql.Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 

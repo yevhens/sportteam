@@ -1,10 +1,6 @@
 package com.sport.team.service;
-
-import com.sport.team.Util;
-import com.sport.team.dao.ToolDAO;
-import com.sport.team.entity.Tool;
-import com.sport.team.entity.Tool;
-import com.sport.team.entity.Tool;
+import com.sport.team.dao.CommunityDAO;
+import com.sport.team.entity.Community;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,20 +11,21 @@ import java.util.List;
 
 import static com.sport.team.Util.getconnection;
 
-public class ToolService implements ToolDAO {
+public class Communities_Service implements CommunityDAO {
 
     Connection connection;
 
     @Override
-    public void add(Tool Tool) throws SQLException {
+    public void add(Community community) throws SQLException {
         PreparedStatement stmt=null;
         try{
             connection=getconnection();
-            stmt=connection.prepareStatement("INSERT INTO Tools VALUES(?,?)");
-            stmt.setInt(1,Tool.getId());
-            stmt.setString(2,Tool.getName());
+            stmt=connection.prepareStatement("INSERT INTO Community VALUES(?,?,?)");
+            stmt.setInt(1,community.getId());
+            stmt.setString(2,community.getName());
+            stmt.setInt(3,community.getCreator().getId());
             stmt.executeUpdate();
-            System.out.println("Successfully added Tool" + " " + Tool.getName());
+            System.out.println("Successfully added community" + " " + community.getId());
             stmt.close();
         }catch (Exception e){e.printStackTrace();
 
@@ -44,20 +41,20 @@ public class ToolService implements ToolDAO {
     }
 
     @Override
-    public Tool get(int id) throws SQLException {
+    public Community get(int id) throws SQLException {
 
         PreparedStatement stmt=null;
         ResultSet rs=null;
-        Tool Tool=new Tool();
+        Community community=new Community();
 
         try{
             connection=getconnection();
-            stmt=connection.prepareStatement("SELECT Tools.id,Tools.name FROM Tools WHERE Tools.id=?");
+            stmt=connection.prepareStatement("SELECT Community.id,Community.name FROM Communities WHERE Communities.id=?");
             stmt.setInt(1,id);
             rs=stmt.executeQuery();
             rs.next();
-            Tool.setId(rs.getInt(1));
-            Tool.setName(rs.getString(2));
+            community.setId(rs.getInt(1));
+            community.setName(rs.getString(2));
             stmt.close();
 
         }finally {
@@ -74,23 +71,22 @@ public class ToolService implements ToolDAO {
 
 
         }
-        return Tool;
+        return community;
     }
 
     @Override
-    public void update(Tool Tool) throws SQLException {
+    public void update(Community community) throws SQLException {
         PreparedStatement stmt=null;
 
         try{
             connection=getconnection();
-            stmt=connection.prepareStatement("UPDATE Tools SET Tools.name=? WHERE Tools.id=?");
-            stmt.setString(1,Tool.getName());
-            stmt.setInt(2,Tool.getId());
-            stmt.executeUpdate();
-            System.out.println("Tool with id"+" "+Tool.getId()+" "+ "is updated");
+        stmt=connection.prepareStatement("UPDATE Communities SET Communities.name=? WHERE Communities.id=?");
+        stmt.setString(1,community.getName());
+        stmt.executeUpdate();
+            System.out.println("Community with id"+" "+community.getId()+" "+ "is updated");
 
 
-        }catch (Exception e){e.printStackTrace();
+    }catch (Exception e){e.printStackTrace();
         }finally {
             if(stmt !=null){
                 stmt.close();
@@ -105,14 +101,14 @@ public class ToolService implements ToolDAO {
 
     }
     @Override
-    public void delete(Tool Tool) throws SQLException {
+    public void delete(Community community) throws SQLException {
         PreparedStatement stmt=null;
         try{
             connection=getconnection();
-            stmt=connection.prepareStatement("DELETE FROM Tools WHERE Tools.id=?");
-            stmt.setInt(1,Tool.getId());
+            stmt=connection.prepareStatement("DELETE FROM Communities WHERE Community.id=?");
+            stmt.setInt(1,community.getId());
             stmt.executeUpdate();
-            System.out.println("Tool with id"+" "+Tool.getId()+" "+ "is deleted");
+            System.out.println("Community with id"+" "+community.getId()+" "+ "is deleted");
         }catch (Exception e){e.printStackTrace();
 
         }finally {
@@ -129,19 +125,19 @@ public class ToolService implements ToolDAO {
     }
 
     @Override
-    public List<Tool> getAll() throws SQLException {
-        List<Tool> list=new ArrayList<>();
+    public List<Community> getAll() throws SQLException {
+        List<Community> list=new ArrayList<>();
         PreparedStatement preparedStatement=null;
         ResultSet rs=null;
         try{
             connection=getconnection();
-            preparedStatement=connection.prepareStatement("SELECT * FROM Tools ORDER BY id");
+            preparedStatement=connection.prepareStatement("SELECT * FROM Communities ORDER BY id");
             rs=preparedStatement.executeQuery();
             while(rs.next()){
-                Tool Tool=new Tool();
-                Tool.setId(rs.getInt(1));
-                Tool.setName(rs.getString(2));
-                list.add(Tool);
+                Community community=new Community();
+                community.setId(rs.getInt(1));
+                community.setName(rs.getString(2));
+                list.add(community);
             }
 
         }catch (Exception e){e.printStackTrace();}

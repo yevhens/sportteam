@@ -1,5 +1,6 @@
 package com.sport.team.entity;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 /**
@@ -11,7 +12,7 @@ public class Comment {
     private int id;
 
     /** The date added. */
-    private Calendar dateAdded;
+    private Date dateAdded;
 
     /** The submitter. */
     private User submitter;
@@ -27,7 +28,7 @@ public class Comment {
      *
      * @return the date added
      */
-    public Calendar getDateAdded() {
+    public Date getDateAdded() {
         return dateAdded;
     }
 
@@ -36,7 +37,7 @@ public class Comment {
      *
      * @param dateAdded the new date added
      */
-    public void setDateAdded(Calendar dateAdded) {
+    public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 

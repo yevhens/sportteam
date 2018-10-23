@@ -1,7 +1,10 @@
 DELETE ALL
 
+SET SQL_SAFE_UPDATES = 0; // do this once
+
 DELETE FROM sportteam.Users;
 DELETE FROM sportteam.Skills;
 DELETE FROM sportteam.Tools;
 DELETE FROM sportteam.Users_Tools;
 DELETE FROM sportteam.Users_Skills;
+

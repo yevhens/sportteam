@@ -1,5 +1,6 @@
 package com.sport.team.entity;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -22,7 +23,7 @@ public class ServiceEvent {
     private String description;
 
     /** The date. */
-    private Calendar date;
+    private Date date;
 
     /** The name. */
     private String name;
@@ -89,7 +90,7 @@ public class ServiceEvent {
      *
      * @return the date
      */
-    public Calendar getDate() {
+    public java.sql.Date getDate() {
         return date;
     }
 
@@ -98,7 +99,7 @@ public class ServiceEvent {
      *
      * @param date the new date
      */
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

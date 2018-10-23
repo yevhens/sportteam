@@ -2,6 +2,7 @@ package com.sport.team.entity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class Project {
     private String city;
 
     /** The date added. */
-    private Calendar dateAdded;
+    private java.sql.Date dateAdded;
 
     /** The description. */
     private String description;
@@ -66,11 +67,36 @@ public class Project {
     /** The title. */
     private String title;
 
+    public Project() {
+    }
+
+    public Project(int id,  String address1, String address2, String city, java.sql.Date dateAdded,
+                   String description, String email, String firstName, String lastName, String phone, String state,
+                   String zip, String title) {
+        this.id = id;
+        this.organizer = organizer;
+        this.address1 = address1;
+        this.address2 = address2;
+        this.city = city;
+        this.dateAdded = dateAdded;
+        this.description = description;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.state = state;
+        this.zip = zip;
+        this.title = title;
+
+    }
+
     /**
      * Gets the id.
      *
      * @return the id
      */
+
+
     public int getId() {
         return id;
     }
@@ -101,6 +127,7 @@ public class Project {
     public void setOrganizer(User organizer) {
         this.organizer = organizer;
     }
+
 
     /**
      * Gets the address 2.
@@ -161,7 +188,7 @@ public class Project {
      *
      * @return the date added
      */
-    public Calendar getDateAdded() {
+    public java.sql.Date getDateAdded() {
         return dateAdded;
     }
 
@@ -170,7 +197,7 @@ public class Project {
      *
      * @param dateAdded the new date added
      */
-    public void setDateAdded(Calendar dateAdded) {
+    public void setDateAdded(java.sql.Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
@@ -406,5 +433,30 @@ public class Project {
      */
     public void setDonations(List<Donation> donations) {
         this.donations = donations;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", organizer=" + organizer +
+                ", address1='" + address1 + '\'' +
+                ", address2='" + address2 + '\'' +
+                ", city='" + city + '\'' +
+                ", dateAdded=" + dateAdded +
+                ", description='" + description + '\'' +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", state='" + state + '\'' +
+                ", submitter=" + submitter +
+                ", zip='" + zip + '\'' +
+                //", volunteers=" + volunteers +
+                //", imageUrls=" + imageUrls +
+                ", comments=" + comments +
+                ", donations=" + donations +
+                ", title='" + title + '\'' +
+                '}';
     }
 }

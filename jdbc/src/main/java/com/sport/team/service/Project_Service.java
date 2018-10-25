@@ -1,15 +1,13 @@
 package com.sport.team.service;
 
 import com.sport.team.dao.ProjectDAO;
-import com.sport.team.dao.UserDAO;
-import com.sport.team.entity.*;
 
+import com.sport.team.entity.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import static com.sport.team.Util.getconnection;
@@ -40,12 +38,27 @@ public class Project_Service implements ProjectDAO {
             preparedStatement.setInt(13,project.getSubmitter().getId());
             preparedStatement.setString(14, project.getZip());
             preparedStatement.setString(15, project.getTitle());
-            //preparedStatement.setString(16, project.getImageUrls().toString());
-            //preparedStatement.setString(17, project.getVolunteers().toString());
 
             preparedStatement.executeUpdate();
             System.out.println("Project successfully added");
             preparedStatement.close();
+
+            for(String image_url : project.getImageUrls()){
+                preparedStatement = connection.prepareStatement("INSERT INTO Project_ImageURLs VALUES(?,?)");
+                preparedStatement.setInt(1,project.getId());
+                preparedStatement.setString(2,image_url);
+                preparedStatement.executeUpdate();
+                preparedStatement.close();
+            }
+
+            for(User user : project.getVolunteers()){
+                preparedStatement = connection.prepareStatement("INSERT INTO Project_Volunteers VALUES(?,?)");
+                preparedStatement.setInt(1,project.getId());
+                preparedStatement.setInt(2,user.getId());
+                preparedStatement.executeUpdate();
+                preparedStatement.close();
+            }
+
 
             for (Comment comment : project.getComments()) {
                 preparedStatement = connection.prepareStatement("INSERT INTO Comments VALUES(?,?,?,?,?)");

@@ -2,10 +2,7 @@ package com.sport.team.service;
 
 import com.sport.team.dao.ServiceEventDAO;
 import com.sport.team.dao.UserDAO;
-import com.sport.team.entity.ServiceEvent;
-import com.sport.team.entity.Skill;
-import com.sport.team.entity.Tool;
-import com.sport.team.entity.User;
+import com.sport.team.entity.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,6 +33,16 @@ public class Service_Event_Service implements ServiceEventDAO {
             preparedStatement.executeUpdate();
             System.out.println("ServiceEvent successfully added");
             preparedStatement.close();
+
+
+            for(Project project : serviceEvent.getProjects()){
+                preparedStatement=connection.prepareStatement("INSERT INTO Service_Event_Projects VALUES(?,?)");
+                preparedStatement.setInt(1,serviceEvent.getId());
+                preparedStatement.setInt(2,project.getId());
+                preparedStatement.executeUpdate();
+                System.out.println("Service_Event_Projects successfully added");
+                preparedStatement.close();
+            }
 
         } catch (Exception e) {// тут ловит ошибку
             e.printStackTrace();
@@ -104,6 +111,8 @@ public class Service_Event_Service implements ServiceEventDAO {
             statement.executeUpdate();
             System.out.println("Service Event successfully updated");
             statement.close();
+
+
 
 
         }catch (Exception e){e.printStackTrace();

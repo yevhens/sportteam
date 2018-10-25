@@ -35,8 +35,8 @@ public class Util {
                     + "PRIMARY KEY (userId,toolID),FOREIGN KEY (userId) REFERENCES Users(id),FOREIGN KEY (toolId) REFERENCES Tools(id))");
             stmt.executeUpdate();
             stmt.close();
-            stmt = conn.prepareStatement("CREATE TABLE Users_Skills (userId INT,skillID INT,"
-                    + "PRIMARY KEY (userId,skillID),FOREIGN KEY (userId) REFERENCES Users(id),FOREIGN KEY (skillId) REFERENCES Skills(id))");
+            stmt = conn.prepareStatement("CREATE TABLE Users_Skills (userId INT,skillId INT,"
+                    + "PRIMARY KEY (userId,skillId),FOREIGN KEY (userId) REFERENCES Users(id),FOREIGN KEY (skillId) REFERENCES Skills(id))");
             stmt.executeUpdate();
             conn.commit();
         } catch (Exception e) {
@@ -95,6 +95,26 @@ public class Util {
             stmt = conn.prepareStatement("CREATE TABLE ServiceEvents (id INT PRIMARY KEY,organizerId INT, " +
                     "communityId INT REFERENCES Communities(id),description VARCHAR(255),name VARCHAR(255)," +
                     "date DATE, FOREIGN KEY (organizerId) REFERENCES Users(id))");
+            stmt.executeUpdate();
+            stmt.close();
+            stmt=conn.prepareStatement("DROP TABLE IF EXISTS Project_Volunteers");
+            stmt.executeUpdate();
+            stmt = conn.prepareStatement("CREATE TABLE Project_Volunteers (projectId INT,userID INT,"
+                    + "PRIMARY KEY (projectId,userID),FOREIGN KEY (projectId) REFERENCES Projects(id),FOREIGN KEY (userId) REFERENCES Users(id))");
+            stmt.executeUpdate();
+            stmt.close();
+            stmt=conn.prepareStatement("DROP TABLE IF EXISTS Image_URLs");
+            stmt=conn.prepareStatement("DROP TABLE IF EXISTS Project_ImageURLs");
+            stmt.executeUpdate();
+            stmt = conn.prepareStatement("CREATE TABLE Project_ImageURLs (projectId INT,imageURL VARCHAR(255),"
+                    + "PRIMARY KEY (projectId),FOREIGN KEY (projectId) REFERENCES Projects(id))");
+            stmt.executeUpdate();
+            stmt.close();
+            stmt=conn.prepareStatement("DROP TABLE IF EXISTS Service_Event_Projects");
+            stmt.executeUpdate();
+            stmt = conn.prepareStatement("CREATE TABLE Service_Event_Projects (service_eventId INT,projectId INT,"
+                    + "PRIMARY KEY (service_eventId, projectId),FOREIGN KEY (service_eventId) REFERENCES ServiceEvents(id)" +
+                    ",FOREIGN KEY (projectId) REFERENCES Projects(id))");
             stmt.executeUpdate();
             conn.commit();
         } catch (Exception e) {

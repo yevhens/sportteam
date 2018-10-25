@@ -12,7 +12,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        User user=new User();
+   /*     User user=new User();
         user.setId(20);//делаю новый айди для юзера
         user.setName("Cory");
         user.setPhone("78990101");
@@ -62,8 +62,9 @@ public class Main {
      comment.setText("This is a test");
      comment.setProject(project);
 
-     comment_service.add(comment);
+     comment_service.add(comment);*/
 
+        Util.initDB2();
 
 
 

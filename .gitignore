@@ -1,10 +1,10 @@
-.idea/dataSources.local.xml
-.idea/vcs.xml
-.idea/workspace.xml
-jdbc/target/classes/com/sport/team/dao/
-jdbc/target/classes/com/sport/team/service/
-.idea/compiler.xml
-.idea/misc.xml
+.idea/
+*.iml
+*.iws
+log/
+target/
+out/
+
 
 
 
